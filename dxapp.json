@@ -1,0 +1,54 @@
+{
+    "name": "oncodeep_upload_v1.0.0",
+    "summary": "File upload to Oncodeep SFTP server",
+    "properties": {
+        "github release": "v1.0.0"
+    },
+    "dxapi": "1.0.0",
+    "inputSpec": [
+        {
+            "name": "file_to_upload",
+            "label": "File to upload to SFTP server",
+            "class": "file",
+            "help": "File to upload to SFTP server. Could be fastq, could be MasterdataFile",
+            "optional": false
+        },
+        {
+            "name": "run_identifier",
+            "label": "Identifier for the run",
+            "class": "string",
+            "help": "Identifier for the run, for example OKD1234. Specifies the subfolder name on the SFTP server",
+            "optional": false
+        }
+
+    ],
+    "outputSpec": [
+        {
+            "name": "logfile",
+            "label": "logfile",
+            "class": "file",
+            "help": "Log file for audit trail",
+            "optional": false
+        }
+    ],
+    "runSpec": {
+        "execDepends": [],
+        "assetDepends": [],
+        "systemRequirements": {
+            "*": {
+                "instanceType": "mem1_ssd1_v2_x2"
+            }
+        },
+        "file": "src/code.sh",
+        "release": "20.04",
+        "version": "0",
+        "interpreter": "bash",
+        "distribution": "Ubuntu"
+    },
+    "access": {
+        "allProjects": "UPLOAD",
+        "network": [
+            "*"
+        ]
+    }
+}
