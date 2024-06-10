@@ -19,8 +19,18 @@
             "class": "string",
             "help": "Identifier for the run, for example OKD1234. Specifies the subfolder name on the SFTP server",
             "optional": false
+        },
+        {
+            "name": "account_type",
+            "label": "Production or validation account",
+            "class": "string",
+            "choices": [
+                "Production",
+                "Validation"
+            ],
+            "help": "Select whether you would like to upload to the production or validation sftp server",
+            "optional": false
         }
-
     ],
     "outputSpec": [
         {
