@@ -8,7 +8,7 @@ The app takes the following inputs:
 
 * file_to_upload - File to be uploaded (e.g. a Fastq file or Masterdata File)
 * run_identifier - Identifier for the run, for example OKD1234. Specifies the subfolder name on the SFTP server
-
+* account_type - Type of run (either 'Production' or 'Validation'). The type selected dictates the SFTP server that will be logged in to
 
 ## Outputs
 

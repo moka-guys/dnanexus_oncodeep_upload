@@ -10,8 +10,7 @@ function main() {
     TOOLS_PROJ='project-ByfFPz00jy1fk6PjpZ95F27J'
     DOCKER_FILEID="$TOOLS_PROJ:file-GkGFVj00XBb45k0Y9QpjqB9p"
     DOCKER_FILENAME=$(dx describe $DOCKER_FILEID --name)
-    CREDENTIALS_FILE="$AUTH_PROJ:oncodeep_credentials.json"
-    CREDENTIALS_FILENAME=$(dx describe $CREDENTIALS_FILE --name)
+
 
     echo "Making logfile outdir"
     LOGFILE_OUTDIR=${OUTDIR}/logfile/oncodeep_upload
@@ -24,7 +23,19 @@ function main() {
     docker load < "$DOCKER_FILENAME"  # Load docker image
     sudo docker images
 
+    if [[ $account_type ==  "Production" ]];  # Determine app running mode
+        then
+            echo "Production SFTP account selected as user input"
+            CREDENTIALS_FILE="$AUTH_PROJ:oncodeep_credentials_production.json"
+    elif [[ $account_type ==  "Validation" ]];
+        then
+            echo "Validation SFTP account selected as user input"
+            CREDENTIALS_FILE="$AUTH_PROJ:oncodeep_credentials_validation.json"
+    fi
+
     echo "Getting secrets"
+    CREDENTIALS_FILENAME=$(dx describe $CREDENTIALS_FILE --name)
+
     dx download $CREDENTIALS_FILE
     ONCODEEP_HOSTNAME=$(jq -r '.hostname' $CREDENTIALS_FILENAME)
     ONCODEEP_USERNAME=$(jq -r '.username' $CREDENTIALS_FILENAME)
